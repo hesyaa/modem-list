@@ -1,4 +1,4 @@
-import {View, Alert} from 'react-native';
+import {View, Alert, Text, Modal} from 'react-native';
 import React, {Component} from 'react';
 import {Header, Clist, Cfooter, Cloader} from './components';
 import {numberWithCommas} from '../../Utils';
@@ -12,6 +12,8 @@ export class index extends Component {
       cart: [],
       TotalHarga: 0,
       confirm: false,
+      modalVisible: false,
+      text: '',
     };
   }
 
@@ -71,6 +73,13 @@ export class index extends Component {
     }
   };
 
+  close = () => {
+    this.setState({
+      modalVisible: false,
+    });
+    this.reset();
+  };
+
   reset = () => {
     const {datas, TotalHarga} = this.state;
 
@@ -91,30 +100,40 @@ export class index extends Component {
     const sum = data.reduce((a, b) => {
       return a + b;
     });
-
-    Alert.alert(
-      'Success!',
-      `you have successfully purchase ${sum} modems with total of Rp.${numberWithCommas(
+    this.setState({
+      modalVisible: true,
+      text: `you have successfully purchase ${sum} modems with total of Rp.${numberWithCommas(
         e,
-      )} Click close to buy another modems `,
-      [{text: 'Close', onPress: () => this.reset()}],
-    );
+      )} Click close to buy another modems`,
+    });
+    // Alert.alert(
+    //   'Success!',
+    //   `you have successfully purchase ${sum} modems with total of Rp.${numberWithCommas(
+    //     e,
+    //   )} Click close to buy another modems`,
+    //   [{text: 'Close', onPress: () => this.reset()}],
+    // );
   };
 
   render() {
-    const {loading, datas, cart, TotalHarga, TestData} = this.state;
+    const {loading, datas, cart, TotalHarga, text, TestData, modalVisible} =
+      this.state;
     return (
       <View>
         <Header total={datas.length} />
         {loading ? (
           <View>
             <Clist data={datas} Adds={this.Adds} cart={cart} Test={TestData} />
+
             <Cfooter
               onPress={this.getFooter}
               Total={TotalHarga}
               Reset={this.reset}
               Checkout={this.checkout}
               Number={numberWithCommas}
+              Modal={modalVisible}
+              Close={this.close}
+              TextModal={text}
             />
           </View>
         ) : (

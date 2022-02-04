@@ -1,6 +1,7 @@
 import {Text, View, TouchableOpacity, ScrollView} from 'react-native';
 import React, {Component} from 'react';
 import {menuBtn, btn, btnAdd, coverList} from './CStyle';
+import {numberWithCommas} from '../../../Utils';
 
 export class Clist extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ export class Clist extends Component {
                   {value.Name}
                 </Text>
                 <Text style={{fontSize: 15, fontWeight: 'bold'}}>
-                  {value.Price}
+                  Rp.{numberWithCommas(value.Price)}
                 </Text>
               </View>
               <View style={menuBtn}>
