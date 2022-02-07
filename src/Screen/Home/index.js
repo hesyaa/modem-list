@@ -21,6 +21,10 @@ export class index extends Component {
     }, 3000);
   }
 
+  listAction = () => {
+    alert('hey');
+  };
+
   getData = async () => {
     const {mainData} = this.state;
     const URI =
@@ -104,6 +108,7 @@ export class index extends Component {
               covertNumber={this.covertNumber}
               convertMax={this.convertMax}
               show={this.show}
+              listAction={this.listAction}
             />
           </View>
         ) : (

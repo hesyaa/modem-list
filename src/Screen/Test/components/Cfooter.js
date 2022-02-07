@@ -1,6 +1,7 @@
 import {Text, View, TouchableOpacity, Pressable, Modal} from 'react-native';
 import React, {Component} from 'react';
 import {coverFooter, textBtn, text, checkout, btnReset} from './CStyle';
+import {colours} from '../../../Utils';
 
 export class Cfooter extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ export class Cfooter extends Component {
               alignSelf: 'center',
               padding: 20,
               borderRadius: 10,
+              zIndex: 1,
             }}>
             <Text
               style={{
@@ -37,7 +39,7 @@ export class Cfooter extends Component {
             <Pressable
               onPress={Close}
               style={{
-                backgroundColor: 'black',
+                backgroundColor: colours.secondary,
                 padding: 5,
                 borderRadius: 20,
                 marginVertical: 10,
@@ -55,12 +57,13 @@ export class Cfooter extends Component {
             justifyContent: 'space-between',
           }}>
           <Text style={text}>Total : </Text>
-          <Text style={text}>Rp.{Number(Total)}</Text>
+          <Text style={text}>Rp. {Number(Total)}</Text>
         </View>
         <TouchableOpacity
           style={{
             ...checkout,
-            backgroundColor: Total == 0 ? 'silver' : 'black',
+            backgroundColor: Total == 0 ? 'silver' : colours.secondary,
+            marginBottom: Total == 0 ? 25 : 5,
           }}
           onPress={() => Checkout(Total)}
           disabled={Total == 0 ? true : false}>
@@ -69,8 +72,21 @@ export class Cfooter extends Component {
         {Total > 0 && (
           <View style={{marginBottom: 30}}>
             <TouchableOpacity style={btnReset} onPress={Reset}>
-              <Text style={{...textBtn, color: 'black'}}>Reset</Text>
+              <Text style={{...textBtn, color: colours.secondary}}>Reset</Text>
             </TouchableOpacity>
+          </View>
+        )}
+        {Modal && (
+          <View
+            style={{
+              backgroundColor: 'black',
+              position: 'absolute',
+              top: -515,
+              width: 393,
+              height: 714,
+              opacity: 0.4,
+            }}>
+            <Text>hello</Text>
           </View>
         )}
       </View>

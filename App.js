@@ -5,7 +5,7 @@ import Test2 from './src/Screen/Home';
 
 export class App extends Component {
   render() {
-    return <Test2 />;
+    return <Test />;
   }
 }
 

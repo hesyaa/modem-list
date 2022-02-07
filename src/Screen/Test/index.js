@@ -102,7 +102,7 @@ export class index extends Component {
     });
     this.setState({
       modalVisible: true,
-      text: `you have successfully purchase ${sum} modems with total of Rp.${numberWithCommas(
+      text: `you have successfully purchase ${sum} modems with total of Rp. ${numberWithCommas(
         e,
       )} Click close to buy another modems`,
     });

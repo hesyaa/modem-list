@@ -1,5 +1,6 @@
 import {View, Text, ActivityIndicator} from 'react-native';
 import React from 'react';
+import {colours} from '../../../Utils';
 
 const Cloader = () => {
   return (
@@ -14,7 +15,7 @@ const Cloader = () => {
         style={{
           fontSize: 20,
           fontWeight: 'bold',
-          color: 'black',
+          color: colours.secondary,
           marginVertical: 15,
         }}>
         Loading Devices data

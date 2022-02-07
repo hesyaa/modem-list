@@ -1,7 +1,9 @@
+const {colours} = require('../../../Utils');
+
 module.exports = {
   container: {
     padding: 20,
-    backgroundColor: '#D81A3C',
+    backgroundColor: colours.primary,
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,
   },
@@ -12,14 +14,14 @@ module.exports = {
   text: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'black',
+    color: colours.secondary,
     marginVertical: 8,
   },
   checkout: {
-    padding: 8,
-    marginVertical: 5,
+    padding: 10,
     borderRadius: 20,
-    marginVertical: 8,
+    color: 'white',
+    marginTop: 5,
   },
   textBtn: {
     textAlign: 'center',
@@ -32,7 +34,8 @@ module.exports = {
     borderRadius: 20,
     padding: 8,
     alignItems: 'center',
-    marginBottom: 5,
+    marginTop: 8,
+    zIndex: 0,
   },
   coverFooter: {
     backgroundColor: 'white',
@@ -66,7 +69,7 @@ module.exports = {
     height: 32,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#3A4144',
     borderRadius: 8,
   },
   coverList: {

@@ -1,7 +1,7 @@
 import {Text, View, TouchableOpacity, ScrollView} from 'react-native';
 import React, {Component} from 'react';
 import {menuBtn, btn, btnAdd, coverList} from './CStyle';
-import {numberWithCommas} from '../../../Utils';
+import {colours, numberWithCommas} from '../../../Utils';
 
 export class Clist extends Component {
   constructor(props) {
@@ -19,18 +19,24 @@ export class Clist extends Component {
             <View style={coverList} key={index}>
               <View style={{flexDirection: 'column', width: 150}}>
                 <Text
-                  style={{fontSize: 18, color: 'black', fontWeight: 'bold'}}>
+                  style={{
+                    fontSize: 18,
+                    color: colours.secondary,
+                    fontWeight: 'bold',
+                  }}>
                   {value.Name}
                 </Text>
-                <Text style={{fontSize: 15, fontWeight: 'bold'}}>
-                  Rp.{numberWithCommas(value.Price)}
+                <Text
+                  style={{fontSize: 15, fontWeight: 'bold', color: '#7D8285'}}>
+                  Rp. {numberWithCommas(value.Price)}
                 </Text>
               </View>
               <View style={menuBtn}>
                 <TouchableOpacity
                   style={{
                     ...btn,
-                    backgroundColor: cart[index].qty == 0 ? '#CFCFCF' : 'black',
+                    backgroundColor:
+                      cart[index].qty == 0 ? '#CFCFCF' : colours.secondary,
                   }}
                   onPress={() => Adds(index, false, value)}
                   disabled={cart[index].qty == 0 ? true : false}>
@@ -44,7 +50,9 @@ export class Clist extends Component {
                   style={{
                     ...btnAdd,
                     backgroundColor:
-                      cart[index].qty < value.Stock ? 'black' : '#CFCFCF',
+                      cart[index].qty < value.Stock
+                        ? colours.secondary
+                        : '#CFCFCF',
                   }}
                   onPress={() => Adds(index, true, value)}
                   disabled={cart[index].qty < value.Stock ? false : true}>

@@ -2,6 +2,7 @@ import {View, Text, Image, StyleSheet} from 'react-native';
 import React from 'react';
 import mobileIcon from '../../../assets/images/Icon.png';
 import {imgstye} from './CStyle';
+import { colours } from '../../../Utils';
 
 const Cloader = () => {
   return (
@@ -15,7 +16,7 @@ const Cloader = () => {
       <Text
         style={{
           fontSize: 20,
-          color: 'black',
+          color: colours.secondary,
           fontWeight: 'bold',
           marginVertical: 15,
         }}>

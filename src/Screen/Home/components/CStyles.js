@@ -1,3 +1,5 @@
+const {colours} = require('../../../Utils');
+
 module.exports = {
   containerIndex: {
     alignItems: 'center',
@@ -7,7 +9,7 @@ module.exports = {
   },
   CHeader: {
     padding: 20,
-    backgroundColor: '#D81A3C',
+    backgroundColor: colours.primary,
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
   },
@@ -26,7 +28,7 @@ module.exports = {
     width: '100%',
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'black',
+    color: colours.secondary,
   },
   coverName: {
     flexDirection: 'column',
@@ -38,9 +40,12 @@ module.exports = {
     justifyContent: 'space-between',
     padding: 15,
     backgroundColor: 'white',
-    elevation: 8,
     marginVertical: 8,
-    borderRadius: 8,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {width: 4, height: 5},
+    shadowRadius: 10,
+    elevation: 5,
   },
   indicatorcover: {
     height: 20,
@@ -52,6 +57,7 @@ module.exports = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   textUsage: {
     flexDirection: 'row',
