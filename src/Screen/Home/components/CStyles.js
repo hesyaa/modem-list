@@ -40,11 +40,9 @@ module.exports = {
     justifyContent: 'space-between',
     padding: 15,
     backgroundColor: 'white',
-    marginVertical: 8,
+    marginVertical: 10,
     borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: {width: 4, height: 5},
-    shadowRadius: 10,
+
     elevation: 5,
   },
   indicatorcover: {

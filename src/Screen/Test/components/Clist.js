@@ -11,12 +11,26 @@ export class Clist extends Component {
 
   render() {
     const {count, button} = this.state;
-    const {data, Adds, cart, Test} = this.props;
+    const {data, Adds, cart, Test, sortList} = this.props;
     return (
-      <View style={{height: '85%', paddingTop: 25}}>
+      <View
+        style={{
+          paddingTop: 25,
+          marginTop: 60,
+          height: '85%',
+        }}>
+        <View
+          style={{
+            backgroundColor: '#F0F0F0',
+            width: '90%',
+            alignSelf: 'center',
+            marginVertical: 15,
+            height: 2,
+          }}
+        />
         <ScrollView showsVerticalScrollIndicator={false}>
           {data.map((value, index) => (
-            <View style={coverList} key={index}>
+            <View style={{...coverList, zIndex: -1}} key={index}>
               <View style={{flexDirection: 'column', width: 150}}>
                 <Text
                   style={{

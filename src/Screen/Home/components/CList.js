@@ -1,4 +1,11 @@
-import {Text, View, StyleSheet, ScrollView, Pressable} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  Pressable,
+  TouchableOpacity,
+} from 'react-native';
 import React, {Component} from 'react';
 import {
   listModem,
@@ -15,10 +22,6 @@ export class CList extends Component {
     super();
   }
 
-  open = () => {
-    alert('hello');
-  };
-
   render() {
     const {
       mainData,
@@ -30,11 +33,28 @@ export class CList extends Component {
       listAction,
     } = this.props;
     return (
-      <View style={{width: '90%', height: '57%'}}>
+      <View
+        style={{
+          width: '90%',
+          height: '54%',
+          paddingBottom: 70,
+          marginTop: 60,
+        }}>
+        <View
+          style={{
+            height: 2,
+            backgroundColor: '#F0F0F0',
+            width: '90%',
+            alignSelf: 'center',
+            marginVertical: 15,
+          }}
+        />
         <ScrollView showsVerticalScrollIndicator={false}>
           {mainData.map((value, index) => (
-            <View key={index} style={{paddingHorizontal: 5, paddingTop: 3}}>
-              <Pressable onPress={() => show(index)}>
+            <View
+              key={index}
+              style={{paddingHorizontal: 5, paddingTop: 3, paddingBottom: 10}}>
+              <TouchableOpacity onPress={() => show(index)}>
                 <View style={listModem} key={index}>
                   <View style={contentCard}>
                     <View style={coverName}>
@@ -126,7 +146,7 @@ export class CList extends Component {
                     </View>
                   )}
                 </View>
-              </Pressable>
+              </TouchableOpacity>
             </View>
           ))}
         </ScrollView>

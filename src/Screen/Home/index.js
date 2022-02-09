@@ -1,6 +1,6 @@
 import {View} from 'react-native';
 import React, {Component} from 'react';
-import {Header, CList, Cloader} from './components';
+import {Header, CList, Cloader, CSort} from './components';
 import {containerIndex} from './components/CStyles';
 
 export class index extends Component {
@@ -9,6 +9,7 @@ export class index extends Component {
     this.state = {
       loading: false,
       mainData: [],
+      sortList: false,
     };
   }
 
@@ -94,10 +95,41 @@ export class index extends Component {
     return `${max}GB`;
   };
 
+  Dropdown = () => {
+    const {sortList} = this.state;
+    this.setState({
+      sortList: !sortList,
+    });
+  };
+
+  SortData = e => {
+    const {mainData} = this.state;
+    if (e == 'Name') {
+      let filter = mainData.sort((a, b) => {
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
+      });
+      this.setState({
+        mainData: filter,
+      });
+    }
+    if (e == 'Usage') {
+      let filter = mainData.sort((a, b) => {
+        return (
+          b.quota.currentUsage / b.quota.maxUsage -
+          a.quota.currentUsage / a.quota.maxUsage
+        );
+      });
+      this.setState({
+        mainData: filter,
+      });
+    }
+  };
+
   render() {
-    const {loading, mainData} = this.state;
+    const {loading, mainData, sortList} = this.state;
     return (
-      <View>
+      <View style={{backgroundColor: 'white'}}>
         <Header data={mainData.length} loading={loading} />
         {loading ? (
           <View style={containerIndex}>
@@ -109,6 +141,11 @@ export class index extends Component {
               convertMax={this.convertMax}
               show={this.show}
               listAction={this.listAction}
+            />
+            <CSort
+              sortList={sortList}
+              Dropdown={this.Dropdown}
+              SortData={this.SortData}
             />
           </View>
         ) : (

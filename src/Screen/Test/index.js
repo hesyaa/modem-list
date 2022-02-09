@@ -1,6 +1,14 @@
 import {View, Alert, Text, Modal} from 'react-native';
 import React, {Component} from 'react';
-import {Header, Clist, Cfooter, Cloader} from './components';
+import {
+  Header,
+  Clist,
+  Cfooter,
+  Cloader,
+  CPopup,
+  CSort,
+  BottomBox,
+} from './components';
 import {numberWithCommas} from '../../Utils';
 
 export class index extends Component {
@@ -14,6 +22,7 @@ export class index extends Component {
       confirm: false,
       modalVisible: false,
       text: '',
+      sortList: false,
     };
   }
 
@@ -115,16 +124,77 @@ export class index extends Component {
     // );
   };
 
+  Dropdown = () => {
+    const {sortList} = this.state;
+
+    this.setState({
+      sortList: !sortList,
+    });
+  };
+
+  SortData = e => {
+    const {datas} = this.state;
+    if (e == 'Max') {
+      let filter = datas.sort((a, b) => {
+        return b.Price - a.Price;
+      });
+      this.setState({
+        datas: filter,
+      });
+    }
+    if (e == 'Min') {
+      let filter = datas.sort((a, b) => {
+        return a.Price - b.Price;
+      });
+      this.setState({
+        datas: filter,
+      });
+    }
+    if (e == 'Name') {
+      let filter = datas.sort((a, b) => {
+        if (a.Name < b.Name) return -1;
+        if (a.Name > b.Name) return 1;
+      });
+      this.setState({
+        datas: filter,
+      });
+    }
+  };
+
+  TestBtn = () => {
+    this.setState({
+      modalVisible: true,
+    });
+  };
+
   render() {
-    const {loading, datas, cart, TotalHarga, text, TestData, modalVisible} =
-      this.state;
+    const {
+      loading,
+      datas,
+      cart,
+      TotalHarga,
+      text,
+      TestData,
+      modalVisible,
+      sortList,
+    } = this.state;
     return (
       <View>
         <Header total={datas.length} />
         {loading ? (
           <View>
-            <Clist data={datas} Adds={this.Adds} cart={cart} Test={TestData} />
-
+            <Clist
+              data={datas}
+              Adds={this.Adds}
+              cart={cart}
+              Test={TestData}
+              sortList={sortList}
+            />
+            <CSort
+              sortList={sortList}
+              Dropdown={this.Dropdown}
+              SortData={this.SortData}
+            />
             <Cfooter
               onPress={this.getFooter}
               Total={TotalHarga}
@@ -134,10 +204,32 @@ export class index extends Component {
               Modal={modalVisible}
               Close={this.close}
               TextModal={text}
+              modalVisible={modalVisible}
+              TextModal={text}
+              Close={this.close}
             />
+
+            {/* <BottomBox
+              TestBtn={this.TestBtn}
+              onPress={this.getFooter}
+              Total={TotalHarga}
+              Reset={this.reset}
+              Checkout={this.checkout}
+              Number={numberWithCommas}
+              Modal={modalVisible}
+              Close={this.close}
+              TextModal={text}
+              modalVisible={modalVisible}
+              TextModal={text}
+              Close={this.close}
+            /> */}
           </View>
         ) : (
           <Cloader />
+        )}
+
+        {modalVisible && (
+          <CPopup Modal={modalVisible} TextModal={text} Close={this.close} />
         )}
       </View>
     );

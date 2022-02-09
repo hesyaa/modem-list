@@ -41,10 +41,11 @@ module.exports = {
     backgroundColor: 'white',
     padding: 15,
     position: 'absolute',
-    bottom: -35,
     width: '100%',
-    elevation: 8,
+    bottom: 80,
     paddingVertical: 13,
+    borderWidth: 1,
+    borderColor: 'lightgrey',
   },
   //list
   menuBtn: {
