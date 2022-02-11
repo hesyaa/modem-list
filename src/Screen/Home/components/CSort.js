@@ -6,7 +6,7 @@ import {colours} from '../../../Utils';
 
 export class CSort extends Component {
   render() {
-    const {sortList, Dropdown, SortData} = this.props;
+    const {sortList, Dropdown, SortData, Default} = this.props;
     return (
       <View
         style={{
@@ -39,7 +39,7 @@ export class CSort extends Component {
             flexDirection: 'column',
           }}>
           <TouchableOpacity
-            onPress={Dropdown}
+            onPress={() => Dropdown(true)}
             style={{
               flexDirection: 'row',
               alignItems: 'center',
@@ -52,7 +52,7 @@ export class CSort extends Component {
               borderColor: '#F0F0F0',
             }}>
             <Text style={{fontSize: 16, fontWeight: 'bold', padding: 5}}>
-              Default
+              {Default}
             </Text>
             <Image source={Chevron} style={{width: 18, height: 18}} />
           </TouchableOpacity>
@@ -73,7 +73,7 @@ export class CSort extends Component {
               }}>
               <TouchableOpacity
                 style={{paddingVertical: 8, width: '70%'}}
-                onPress={() => SortData('Name')}>
+                onPress={() => SortData('Name', 'name')}>
                 <Text style={{color: colours.secondary}}>Name</Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -83,7 +83,7 @@ export class CSort extends Component {
                   borderColor: '#F6F6F6',
                   width: '70%',
                 }}
-                onPress={() => SortData('Usage')}>
+                onPress={() => SortData('Usage', 'quota')}>
                 <Text style={{color: colours.secondary}}>Quota</Text>
               </TouchableOpacity>
             </View>

@@ -23,6 +23,7 @@ export class index extends Component {
       modalVisible: false,
       text: '',
       sortList: false,
+      Default: 'Default',
     };
   }
 
@@ -70,6 +71,7 @@ export class index extends Component {
       this.setState({
         cart,
         TotalHarga: TotalHarga + value.Price,
+        sortList: false,
       });
     } else {
       let data = cart[index].qty;
@@ -78,6 +80,7 @@ export class index extends Component {
       this.setState({
         cart,
         TotalHarga: TotalHarga - value.Price,
+        sortList: false,
       });
     }
   };
@@ -96,6 +99,7 @@ export class index extends Component {
       return {...value, qty: 0, Total: 0, btn: true};
     });
     this.setState({
+      sortList: false,
       cart: data,
       TotalHarga: 0,
     });
@@ -109,7 +113,9 @@ export class index extends Component {
     const sum = data.reduce((a, b) => {
       return a + b;
     });
+
     this.setState({
+      sortList: false,
       modalVisible: true,
       text: `you have successfully purchase ${sum} modems with total of Rp. ${numberWithCommas(
         e,
@@ -132,32 +138,44 @@ export class index extends Component {
     });
   };
 
-  SortData = e => {
-    const {datas} = this.state;
-    if (e == 'Max') {
-      let filter = datas.sort((a, b) => {
-        return b.Price - a.Price;
-      });
-      this.setState({
-        datas: filter,
-      });
+  SortData = (e, type) => {
+    const {datas, cart} = this.state;
+    if (type == 'Highest Price') {
+      if (e == 'Max') {
+        let filter = cart.sort((a, b) => {
+          return b.Price - a.Price;
+        });
+        this.setState({
+          datas: filter,
+          Default: type,
+          sortList: false,
+        });
+      }
     }
-    if (e == 'Min') {
-      let filter = datas.sort((a, b) => {
-        return a.Price - b.Price;
-      });
-      this.setState({
-        datas: filter,
-      });
+    if (type == 'Lowest Price') {
+      if (e == 'Min') {
+        let filter = cart.sort((a, b) => {
+          return a.Price - b.Price;
+        });
+        this.setState({
+          datas: filter,
+          Default: type,
+          sortList: false,
+        });
+      }
     }
-    if (e == 'Name') {
-      let filter = datas.sort((a, b) => {
-        if (a.Name < b.Name) return -1;
-        if (a.Name > b.Name) return 1;
-      });
-      this.setState({
-        datas: filter,
-      });
+    if (type == 'Name') {
+      if (e == 'Name') {
+        let filter = cart.sort((a, b) => {
+          if (a.Name < b.Name) return -1;
+          if (a.Name > b.Name) return 1;
+        });
+        this.setState({
+          datas: filter,
+          Default: type,
+          sortList: false,
+        });
+      }
     }
   };
 
@@ -169,6 +187,7 @@ export class index extends Component {
 
   render() {
     const {
+      Default,
       loading,
       datas,
       cart,
@@ -194,6 +213,7 @@ export class index extends Component {
               sortList={sortList}
               Dropdown={this.Dropdown}
               SortData={this.SortData}
+              Default={Default}
             />
             <Cfooter
               onPress={this.getFooter}

@@ -6,7 +6,7 @@ import {colours} from '../../../Utils';
 
 export class CSort extends Component {
   render() {
-    const {sortList, Dropdown, SortData} = this.props;
+    const {sortList, Dropdown, SortData, Default} = this.props;
     return (
       <View
         style={{
@@ -44,15 +44,21 @@ export class CSort extends Component {
               flexDirection: 'row',
               alignItems: 'center',
               borderRadius: 8,
-              padding: 5,
+              padding: 6,
               backgroundColor: '#F6F6F6',
               width: '80%',
               justifyContent: 'space-around',
               borderWidth: 1,
               borderColor: '#F0F0F0',
             }}>
-            <Text style={{fontSize: 16, fontWeight: 'bold', padding: 5}}>
-              Default
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: 'bold',
+                padding: 5,
+                marginHorizontal: 5,
+              }}>
+              {Default}
             </Text>
             <Image source={Chevron} style={{width: 18, height: 18}} />
           </TouchableOpacity>
@@ -74,7 +80,7 @@ export class CSort extends Component {
               }}>
               <TouchableOpacity
                 style={{paddingVertical: 8, width: '70%'}}
-                onPress={() => SortData('Max')}>
+                onPress={() => SortData('Max', 'Highest Price')}>
                 <Text style={{color: colours.secondary}}>Highest Price</Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -83,14 +89,15 @@ export class CSort extends Component {
                   borderTopWidth: 1,
                   borderBottomWidth: 1,
                   borderColor: '#F6F6F6',
+
                   width: '70%',
                 }}
-                onPress={() => SortData('Min')}>
+                onPress={() => SortData('Min', 'Lowest Price')}>
                 <Text style={{color: colours.secondary}}>Lowest Price</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{width: '70%', paddingVertical: 8}}
-                onPress={() => SortData('Name')}>
+                onPress={() => SortData('Name', 'Name')}>
                 <Text style={{color: colours.secondary}}>Name</Text>
               </TouchableOpacity>
             </View>

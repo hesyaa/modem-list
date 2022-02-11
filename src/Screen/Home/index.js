@@ -10,6 +10,7 @@ export class index extends Component {
       loading: false,
       mainData: [],
       sortList: false,
+      Default: 'Default',
     };
   }
 
@@ -50,7 +51,7 @@ export class index extends Component {
   };
 
   show = e => {
-    const {mainData} = this.state;
+    const {mainData, sortList} = this.state;
 
     let select = mainData.map((value, index) => {
       if (e == index) {
@@ -60,6 +61,7 @@ export class index extends Component {
     });
     this.setState({
       mainData: select,
+      sortList: false,
     });
   };
 
@@ -95,39 +97,57 @@ export class index extends Component {
     return `${max}GB`;
   };
 
-  Dropdown = () => {
-    const {sortList} = this.state;
+  Dropdown = e => {
+    const {sortList, mainData} = this.state;
+
+    let select = mainData.map((value, index) => {
+      if (e == true) {
+        value.item = false;
+      }
+      return {...value};
+    });
+
     this.setState({
       sortList: !sortList,
+      mainData: select,
     });
   };
 
-  SortData = e => {
-    const {mainData} = this.state;
-    if (e == 'Name') {
-      let filter = mainData.sort((a, b) => {
-        if (a.name < b.name) return -1;
-        if (a.name > b.name) return 1;
-      });
-      this.setState({
-        mainData: filter,
-      });
+  SortData = (e, type) => {
+    const {mainData, Default} = this.state;
+
+    if (type == 'name') {
+      if (e == 'Name') {
+        let filter = mainData.sort((a, b) => {
+          if (a.name < b.name) return -1;
+          if (a.name > b.name) return 1;
+        });
+        this.setState({
+          mainData: filter,
+          Default: type,
+          sortList: false,
+        });
+      }
     }
-    if (e == 'Usage') {
-      let filter = mainData.sort((a, b) => {
-        return (
-          b.quota.currentUsage / b.quota.maxUsage -
-          a.quota.currentUsage / a.quota.maxUsage
-        );
-      });
-      this.setState({
-        mainData: filter,
-      });
+    if (type == 'quota') {
+      if (e == 'Usage') {
+        let filter = mainData.sort((a, b) => {
+          return (
+            b.quota.currentUsage / b.quota.maxUsage -
+            a.quota.currentUsage / a.quota.maxUsage
+          );
+        });
+        this.setState({
+          mainData: filter,
+          Default: type,
+          sortList: false,
+        });
+      }
     }
   };
 
   render() {
-    const {loading, mainData, sortList} = this.state;
+    const {loading, mainData, sortList, Default} = this.state;
     return (
       <View style={{backgroundColor: 'white'}}>
         <Header data={mainData.length} loading={loading} />
@@ -146,6 +166,7 @@ export class index extends Component {
               sortList={sortList}
               Dropdown={this.Dropdown}
               SortData={this.SortData}
+              Default={Default}
             />
           </View>
         ) : (
